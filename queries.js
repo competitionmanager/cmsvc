@@ -6,8 +6,10 @@ const pool = new Pool({
     port: 5432,
 })
 
-const getUsers = (request, response) => {
-    pool.query('SELECT * FROM users', (error, results) => {
+const getUser = (request, response) => {
+    var id = request.params.id
+
+    pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
         if (error) {
             throw error
         }
@@ -16,5 +18,5 @@ const getUsers = (request, response) => {
 }
 
 module.exports = {
-    getUsers
+    getUser
 }
