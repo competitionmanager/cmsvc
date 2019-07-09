@@ -1,24 +1,25 @@
 # cmsvc
 Service to handle cm requests
 
-### Running the server
+## Setup environment
+
+### Install node modules
 ```
-node index.js
+npm install
 ```
 
-### Starting the database
+### Run node server
 ```
-psql postgres
-\list // to see the list of databases
-\c [db name] // to connect to databases
+node_modules/nodemon/bin/nodemon.js index.js
 ```
+This restarts the server whenever there are changes to any of the node files.
 
-### Checking if Postgres is running in the background
+### Start postgres database
 ```
-ps aux | grep Postgres
+setup_db/setup_db.sh 
 ```
+This script recreates (drop + create) the `cmdb` database and adds `users` and `team` tables.
 
-### Running Postgres
-```
-brew services start postgresql
-```
+## Testing
+
+Use Postman.

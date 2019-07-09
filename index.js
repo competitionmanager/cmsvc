@@ -23,6 +23,8 @@ app.get('/team/:id', db.getTeam)
 
 app.post('/team', db.createTeam)
 
+app.delete('/team/:id', db.deleteTeam)
+
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
 })
