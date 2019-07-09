@@ -28,16 +28,39 @@ const getTeam = (request, response) => {
     })
 }
 
+const deleteTeam = (request, response) => {
+    var id = request.params.id
+
+    console.log(request.params.id)
+
+    pool.query('DELETE FROM team WHERE id = $1', [id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        console.log(results)
+
+        console.log(results["rowCount"])
+        
+        if (results["rowCount"] == 1) {
+            response.status(200).json({"status": "success"})
+        } else {
+            response.status(200).json({"status": "failed"})
+        }
+        
+    })
+}
+
 
 const createTeam = (request, response) => {
     console.log(request.body);
 
     var name = request.body.name;
     var bio = request.body.bio;
+    var userid = request.body.userid;
 
     pool.query(
-        'INSERT INTO team (name, bio, created) VALUES ($1, $2, current_timestamp)',
-        [name, bio], (error, results) => {
+        'INSERT INTO team (name, bio, users, created) VALUES ($1, $2, $3, current_timestamp)',
+        [name, bio, [userid]], (error, results) => {
         if (error) {
             throw error
         }
@@ -49,5 +72,6 @@ const createTeam = (request, response) => {
 module.exports = {
     getUser,
     getTeam,
-    createTeam
+    createTeam,
+    deleteTeam,
 }
