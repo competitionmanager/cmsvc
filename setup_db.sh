@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DROP TABLE users;
+
+CREATE TABLE users(
+    id INT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    created TIMESTAMPTZ NOT NULL,
+);
+
+CREATE TABLE team(
+    id SERIAL NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    bio TEXT NOT NULL,
+    created TIMESTAMPTZ NOT NULL
+);
